@@ -42,7 +42,7 @@ def index(request):
 @api_view(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
 def person(request):
     if request.method == "GET":
-        objs = Person.objects.all()
+        objs = Person.objects.filter(color__isnull = False)
         serializer = PeopleSerializer(objs, many = True)
         return Response(serializer.data)
     elif request.method == "POST":
@@ -61,7 +61,7 @@ def person(request):
             return Response(serializer.data)
         
         return Response(serializer.errors)
-    elif request.method == "PATCH":   # partial updating, the field which is to be updated is passed
+    elif request.method == "PATCH":   # partial updation, the field which is to be updated is passed
         data = request.data
         obj = Person.objects.get(id = data['id'])
         serializer = PeopleSerializer(obj, data = data, partial = True)
