@@ -1,4 +1,4 @@
-from home.views  import index, person, login, PersonAPI, PeopleViewSet
+from home.views  import index, person, login, PersonAPI, PeopleViewSet, RegisterAPI, LoginAPI
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
@@ -8,6 +8,8 @@ urlpatterns = router.urls
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('register/', RegisterAPI.as_view()),
+    path('login/', LoginAPI.as_view()),
     path('index/', index),
     path('person/', person),
     path('login/', login),
